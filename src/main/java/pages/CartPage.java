@@ -3,6 +3,11 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import java.math.RoundingMode;
+import java.math.BigDecimal;
+
+
+import java.io.Console;
 import java.util.Scanner;
 
 import java.util.List;
@@ -99,7 +104,10 @@ public class CartPage {
 
 
         }
-       return sum + taxDouble;
+       Double sum_more_decimal = sum + taxDouble;
+       BigDecimal bd = new BigDecimal(sum_more_decimal).setScale(2, RoundingMode.HALF_UP);
+       double sum_2decimal = bd.doubleValue();
+       return sum_2decimal;
     }
 
     public void printNamesProductInCart(){
