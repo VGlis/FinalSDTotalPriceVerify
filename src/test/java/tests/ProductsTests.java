@@ -11,6 +11,7 @@ import pages.ProductsPage;
 import provider.ProductsProvider;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ProductsTests {
@@ -232,8 +233,10 @@ public class ProductsTests {
 
         productsPage.close();
     }
-    /*@Test
-    public void verifySortProductByNameAZcompateTo() {
+
+
+    @Test
+    public void verifySortProductByNameAZ_Array_compare() {
         System.setProperty("webdriver.chrome.driver","C:\\Users\\Vladan\\Downloads\\chromedriver_win32\\chromedriver.exe");
         ChromeDriver driver = new ChromeDriver();
 
@@ -244,22 +247,41 @@ public class ProductsTests {
         loginPage.clickLogin();
 
         ProductsPage productsPage = new ProductsPage(driver);
+        List actual = productsPage.isProductSortFromAZ_Array_ListString_Actual();
+        Collections.sort(actual);
+        System.out.println("|| actual: || " + actual);
         productsPage.sortByName( "Name (A to Z)");
+        List sorted = productsPage.isProductSortFromAZ_Array_ListString_Actual();
+        System.out.println("|| sorted: || " + sorted);
 
-        boolean isSortedByNameAZ = productsPage.isProductSortFromAToZ();
-
-        if(isSortedByNameAZ) {
-            System.out.println("|| Sorting is as expected ||");
-        }
-        else {
-            System.out.println("|| Sorting is not as expected ||");
-        }
-
-        Assert.assertEquals(isSortedByNameAZ, true, "Products are not sorted as expected, from Name (A to Z)");
+        Assert.assertEquals(actual, sorted, "Products are not sorted as expected, from Name (A to Z)");
 
         productsPage.close();
-    }*/
+    }
 
+    @Test
+    public void verifySortProductByNameZA_Array_compare() {
+        System.setProperty("webdriver.chrome.driver","C:\\Users\\Vladan\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        ChromeDriver driver = new ChromeDriver();
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.openPage();
+        loginPage.setUserName("standard_user");
+        loginPage.setPassword("secret_sauce");
+        loginPage.clickLogin();
+
+        ProductsPage productsPage = new ProductsPage(driver);
+        List actual = productsPage.isProductSortFromAZ_Array_ListString_Actual();
+        Collections.sort(actual, Collections.reverseOrder());
+        System.out.println("|| actual_reverseOrder: || " + actual);
+        productsPage.sortByName( "Name (Z to A)");
+        List sorted = productsPage.isProductSortFromAZ_Array_ListString_Actual();
+        System.out.println("|| sorted_reverseOrder: || " + sorted);
+
+        Assert.assertEquals(actual, sorted, "Products are not sorted as expected, from Name (Z to A)");
+
+        productsPage.close();
+    }
 
 
 }

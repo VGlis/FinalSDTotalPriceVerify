@@ -281,6 +281,50 @@ public class ProductsPage {
 
     }
 
+    public List<String> isProductSortFromAZ_Array_ListString_Actual() {
+        List<String> AZ_Array_actual  = new ArrayList<>();
+        WebElement container = driver.findElement(By.id("inventory_container"));
+        List<WebElement> listInventoryItems = container.findElements(By.xpath(".//div[@class='inventory_item']"));
+
+        for (int i = 0; i < listInventoryItems.size(); i++)
+        {
+            WebElement itemNames = listInventoryItems.get(i).findElement(By.xpath(".//div[@class='inventory_item_name']"));
+            AZ_Array_actual.add(itemNames.getText());
+        }
+
+        return AZ_Array_actual;
+    }
+
+    public List<String> isProductSortFromAZ_Array_ListString_sortedAZ() {
+        List<String> AZ_Array_sorted  = new ArrayList<>();
+        WebElement container = driver.findElement(By.id("inventory_container"));
+        List<WebElement> listInventoryItems = container.findElements(By.xpath(".//div[@class='inventory_item']"));
+
+        for (int i = 0; i < listInventoryItems.size(); i++)
+        {
+            WebElement itemNames = listInventoryItems.get(i).findElement(By.xpath(".//div[@class='inventory_item_name']"));
+            AZ_Array_sorted.add(itemNames.getText());
+
+        }
+        Collections.sort(AZ_Array_sorted);
+        return AZ_Array_sorted;
+    }
+
+    public List<String> isProductSortFromZA_Array_ListString_sortedZA() {
+        List<String> ZA_Array_sorted  = new ArrayList<>();
+        WebElement container = driver.findElement(By.id("inventory_container"));
+        List<WebElement> listInventoryItems = container.findElements(By.xpath(".//div[@class='inventory_item']"));
+
+        for (int i = 0; i < listInventoryItems.size(); i++)
+        {
+            WebElement itemNames = listInventoryItems.get(i).findElement(By.xpath(".//div[@class='inventory_item_name']"));
+            ZA_Array_sorted.add(itemNames.getText());
+        }
+
+        Collections.sort(ZA_Array_sorted, Collections.reverseOrder());
+        return ZA_Array_sorted;
+    }
+
     public boolean isProductSortFromAZ_Array() {
         List<String> AZ_Array_actual  = new ArrayList<>();
         List<String> AZ_Array_sorted  = new ArrayList<>();
